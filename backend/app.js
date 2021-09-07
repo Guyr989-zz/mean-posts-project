@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const Post = require("./model/Post");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
@@ -28,6 +29,38 @@ app.use((req, res, next) => {
     "GET, POST, PATCH, DELETE, OPTIONS"
   );
   next();
+});
+
+app.get("/api/posts", (req, res, next) => {
+  Post.find().then((documents) => {
+    res.status(200).send({
+      message: "Posts fetched",
+      posts: documents,
+    });
+  });
+});
+
+app.post("/api/posts", (req, res, next) => {
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content,
+  });
+
+  post.save();
+
+  res.status(201).json({
+    message: "New post created",
+    post,
+  });
+});
+
+app.delete("/api/posts/:id", (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(result);
+    res.status(200).send({
+      message: `Post ${req.params.id} was deleted`,
+    });
+  });
 });
 
 module.exports = app;

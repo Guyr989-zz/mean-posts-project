@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from 'src/app/posts.service';
 import { Post } from '../post.model';
 
 @Component({
@@ -9,29 +10,15 @@ import { Post } from '../post.model';
 export class PostsListComponent implements OnInit {
   active: boolean = false;
   postId: string = '';
-  posts: Post[] = [
-    {
-      id: '1',
-      title: 'hello',
-      content:
-        'hello content hello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello content',
-    },
-    {
-      id: '2',
-      title: 'hello2',
-      content:
-        'hello content hello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello content',
-    },
-    {
-      id: '3',
-      title: 'hello3',
-      content:
-        'hello content hello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello contenthello content',
-    },
-  ];
-  constructor() {}
+  posts: Post[] = [];
+  constructor(public ps: PostsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.ps.getPosts();
+    this.ps.getUpdatedPosts().subscribe((results) => {
+      this.posts = results;
+    });
+  }
 
   toggleContent(postId: string) {
     if (this.postId == postId) {
@@ -48,6 +35,6 @@ export class PostsListComponent implements OnInit {
   }
   onDelete(e: MouseEvent, postId: string) {
     e.stopPropagation();
-    console.log(postId);
+    this.ps.deletePost(postId);
   }
 }

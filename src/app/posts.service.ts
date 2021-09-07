@@ -12,14 +12,45 @@ export class PostsService {
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    return [...this.posts];
+    this.http
+      .get<{ message: string; posts: Post[] }>(
+        'http://localhost:3000/api/posts'
+      )
+      .subscribe((postsFetched) => {
+        this.posts = postsFetched.posts;
+        console.log(postsFetched);
+        this.updatedPosts.next([...this.posts]);
+      });
+  }
+
+  getUpdatedPosts() {
+    return this.updatedPosts.asObservable();
   }
 
   addPost(post: Post) {
-    console.log(post);
+    this.http
+      .post<{ message: string; post: Post }>(
+        'http://localhost:3000/api/posts',
+        post
+      )
+      .subscribe((results) => {
+        console.log(results);
+        post.id = results.post.id;
+        this.posts.push(post);
+        this.updatedPosts.next([...this.posts]);
+      });
   }
 
   deletePost(postId: string) {
-    console.log(postId + ' deleted');
+    this.http
+      .delete<{ message: string }>('http://localhost:3000/api/posts/' + postId)
+      .subscribe((results) => {
+        this.posts = this.posts.filter((post) => {
+          return post.id !== postId;
+        });
+        console.log(results.message);
+
+        this.updatedPosts.next([...this.posts]);
+      });
   }
 }
