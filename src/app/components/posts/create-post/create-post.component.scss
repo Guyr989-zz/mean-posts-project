@@ -1,0 +1,39 @@
+.post-form {
+  padding: 5em;
+  .form-control {
+    position: relative;
+    margin-bottom: 3em;
+    label {
+      position: absolute;
+      top: 12px;
+      left: 5px;
+      font-size: 1.4rem;
+      color: #383737;
+      transition: all 0.3s;
+    }
+  }
+
+  textarea:focus + label,
+  input:focus + label {
+    color: red;
+    font-size: 1.2rem;
+    top: -16px;
+    left: 0;
+    transition: all 0.3s;
+  }
+
+  input,
+  textarea {
+    padding: 0.2em;
+    font-size: 1.6rem;
+    border-radius: 4px;
+  }
+
+  input {
+    height: 40px;
+  }
+
+  textarea {
+    height: 70px;
+  }
+}

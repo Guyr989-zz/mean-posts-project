@@ -1,1 +1,37 @@
-<p>posts-list works!</p>
+<div class="posts-list-container">
+  <ul *ngIf="posts.length > 0" class="posts-list">
+    <li *ngFor="let post of posts">
+      <div>
+        <div class="post-details" (click)="toggleContent(post.id)">
+          <div class="title flex-container space-between">
+            {{ post.title }}
+            <div
+              [ngClass]="{ active: active === true && post.id == postId }"
+              class="arrow"
+            >
+              >
+            </div>
+          </div>
+          <div
+            [ngClass]="{ open: active === true && post.id == postId }"
+            class="content flex-container space-between"
+          >
+            {{ post.content }}
+            <div class="post-actions flex-container">
+              <button (click)="onEdit($event, post.id)" class="btn btn-edit">
+                EDIT
+              </button>
+              <button
+                (click)="onDelete($event, post.id)"
+                class="btn btn-delete"
+              >
+                DELETE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <p *ngIf="posts.length === 0">No posts yet</p>
+</div>

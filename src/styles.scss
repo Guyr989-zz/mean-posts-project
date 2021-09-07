@@ -1,1 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
+$bg-dark: #d4d4d4;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+main {
+  padding: 10px;
+  background: $bg-dark;
+  border-radius: 12px;
+  border: 1px solid #000000;
+}
+
+@media (min-width: 768px) {
+  main {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+input,
+textarea,
+.btn {
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.btn {
+  padding: 0.5em;
+  border: none;
+  border-radius: 4px;
+
+  font-size: 1.6em;
+
+  box-shadow: 0 0 2px #110101;
+  transform-origin: right;
+  transition: box-shadow, font-size 0.2s;
+
+  cursor: pointer;
+}
+
+.btn:active {
+  box-shadow: none;
+  font-size: 1.5em;
+}
+
+.btn-edit,
+.btn-delete {
+  width: 70px;
+  height: 30px;
+  color: #fff;
+  background: rgb(235, 73, 73);
+  font-weight: bold;
+  font-size: 0.7em;
+  box-shadow: none;
+}
+
+.btn-edit {
+  background: rgb(255, 229, 80);
+  color: #000;
+}
+
+.btn-edit:active,
+.btn-delete:active {
+  font-size: 0.6em;
+}
