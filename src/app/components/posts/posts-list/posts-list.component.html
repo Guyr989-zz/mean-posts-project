@@ -18,9 +18,9 @@
           >
             {{ post.content }}
             <div class="post-actions flex-container">
-              <button (click)="onEdit($event, post.id)" class="btn btn-edit">
+              <a class="btn btn-edit" [routerLink]="['/edit', post.id]">
                 EDIT
-              </button>
+              </a>
               <button
                 (click)="onDelete($event, post.id)"
                 class="btn btn-delete"

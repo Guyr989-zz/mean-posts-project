@@ -29,10 +29,7 @@ export class PostsListComponent implements OnInit {
       this.active = true;
     }
   }
-  onEdit(e: MouseEvent, postId: string) {
-    e.stopPropagation();
-    console.log(postId);
-  }
+
   onDelete(e: MouseEvent, postId: string) {
     e.stopPropagation();
     this.ps.deletePost(postId);

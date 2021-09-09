@@ -6,11 +6,10 @@ const mongoose = require("mongoose");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const connectionURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.p6pyb.mongodb.net/mean-course?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.p6pyb.mongodb.net/mean-course?retryWrites=true&w=majority`
-  )
+  .connect(connectionURL)
   .then(() => {
     console.log("connected to db");
   })
@@ -26,7 +25,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH,PUT, DELETE, OPTIONS"
   );
   next();
 });
@@ -51,6 +50,22 @@ app.post("/api/posts", (req, res, next) => {
   res.status(201).json({
     message: "New post created",
     post,
+  });
+});
+
+app.put("/api/posts/:id", (req, res, next) => {
+  const post = new Post({
+    _id: req.params.id,
+    title: req.body.title,
+    content: req.body.content,
+  });
+  console.log(post);
+
+  Post.updateOne({ _id: req.params.id }, post).then((result) => {
+    console.log(result);
+    res.status(200).json({
+      message: "post updated!",
+    });
   });
 });
 

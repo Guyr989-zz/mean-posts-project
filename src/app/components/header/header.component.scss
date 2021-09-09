@@ -21,4 +21,22 @@
       font-size: 2.1rem;
     }
   }
+  .active-link {
+    color: rgb(236, 211, 234);
+    text-shadow: 0 0 3px #000;
+    font-weight: bold;
+    animation: annoyPeople 1s ease-in infinite;
+  }
+
+  @keyframes annoyPeople {
+    0% {
+      font-size: 2.1rem;
+    }
+    50% {
+      font-size: 2rem;
+    }
+    100% {
+      font-size: 2.1rem;
+    }
+  }
 }

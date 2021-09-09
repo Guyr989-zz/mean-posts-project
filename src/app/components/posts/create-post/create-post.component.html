@@ -1,17 +1,22 @@
-<form class="post-form" (submit)="onAddPost(postForm)" #postForm="ngForm">
+<form class="post-form" (submit)="onPostSave(postForm)" #postForm="ngForm">
   <div class="form-control">
     <input
       id="title"
       type="text"
       name="title"
       #title="ngModel"
-      ngModel
+      [ngModel]="post?.title"
       required
     />
     <label for="title" class="form-label">Post title...</label>
   </div>
   <div class="form-control">
-    <textarea name="content" #content="ngModel" ngModel required></textarea>
+    <textarea
+      name="content"
+      #content="ngModel"
+      [ngModel]="post?.content"
+      required
+    ></textarea>
     <label for="title" class="form-label">Write something...</label>
   </div>
   <div class="form-control">
