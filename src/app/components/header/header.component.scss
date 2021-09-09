@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 3em;
+  background: dodgerblue;
+  margin-bottom: 4em;
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+  h1 {
+    color: #fff;
+    font-size: 3rem;
+  }
+  a {
+    text-decoration: none;
+    font-size: 2rem;
+    color: #fff;
+    transition: font-size 0.3s;
+    &:hover {
+      cursor: pointer;
+      font-size: 2.1rem;
+    }
+  }
+}
